@@ -19,6 +19,15 @@ export const GET_POST = gql`
     }
 `
 
+export const GET_ALL_CATEGORIES = gql`
+    ${CATEGORY_FRAGMENT}
+    query getAllCategories {
+        allCategories {
+            ...Category
+        }
+    }
+`
+
 export const GET_CATEGORY = gql`
     ${CATEGORY_FRAGMENT}
     query getCategory($id: ID!) {

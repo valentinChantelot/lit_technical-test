@@ -4,8 +4,10 @@ import { useQuery } from '@apollo/client'
 
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
+import Chip from '@mui/material/Chip'
 
 import { GET_POST } from '../apollo/queries/index'
+import { useCategory } from '../hooks/useCategory'
 
 import Loader from '../components/Loader'
 
@@ -24,6 +26,7 @@ const PostComponent = () => {
             Post: any
         }
     }
+    const { category } = useCategory(data?.Post?.id)
 
     const style = {
         backgroundImage: `url('${data?.Post?.cover}')`,
@@ -35,6 +38,7 @@ const PostComponent = () => {
             {error && <p>Oups, it's seems that an error occured.</p>}
 
             <div className="illustration" style={style}></div>
+            <Chip label={category?.title} />
             <Typography gutterBottom variant="h1" component="h1">
                 {data?.Post?.title}
             </Typography>

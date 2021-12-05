@@ -14,12 +14,14 @@ import Chip from '@mui/material/Chip'
 
 import { truncate } from '../utils/truncate'
 import { useAllPosts } from '../hooks/useAllPosts'
+import { useAllCategories } from '../hooks/useAllCategories'
 
 import Loader from '../components/Loader'
 import { POSTS_PER_PAGE_LIMIT } from '../utils/constants'
 
 const Home = () => {
     const [page, setPage] = useState(0) as [page: number, setPage: Function]
+    const { allCategories } = useAllCategories()
     const { loading, error, allPosts, numberOfPosts, fetchMore } = useAllPosts(
         page,
         POSTS_PER_PAGE_LIMIT
@@ -32,6 +34,13 @@ const Home = () => {
             },
         })
         setPage(page + 1)
+    }
+
+    const getCategory = (id: string) => {
+        const correspondingCategory = allCategories.find(
+            (category: { id: string }) => category.id === id
+        )
+        return correspondingCategory.title
     }
 
     return (
@@ -53,7 +62,7 @@ const Home = () => {
                         alt="green iguana"
                     />
                     <CardContent>
-                        <Chip label="Chip Filled" />
+                        <Chip label={getCategory(post.category_id)} />
                         <Typography gutterBottom variant="h5" component="h2">
                             {post.title}
                         </Typography>
