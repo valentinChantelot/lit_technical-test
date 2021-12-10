@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_ALL_POSTS, POSTS_COUNT } from '../apollo/queries/index'
 
-export const useAllPosts = (page, perPage = -1) => {
+export const useAllPosts = (perPage = -1) => {
+    const [page, setPage] = useState(0)
     const { loading, error, data, fetchMore } = useQuery(GET_ALL_POSTS, {
         variables: {
             page: page,
@@ -13,5 +15,14 @@ export const useAllPosts = (page, perPage = -1) => {
     const { data: count } = useQuery(POSTS_COUNT)
     const numberOfPosts = count?._allPostsMeta?.count ?? 0
 
-    return { loading, error, allPosts, numberOfPosts, fetchMore }
+    const fetchMorePosts = () => {
+        fetchMore({
+            variables: {
+                page: page + 1,
+            },
+        })
+        setPage(page + 1)
+    }
+
+    return { loading, error, allPosts, numberOfPosts, fetchMorePosts }
 }
