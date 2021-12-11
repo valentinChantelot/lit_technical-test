@@ -2,6 +2,7 @@ import React from 'react'
 
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
@@ -29,9 +30,13 @@ const Home = () => {
 
             {error && <p>Oups, it's seems that an error occured.</p>}
 
-            {allPosts.map((post: any) => (
-                <Post post={post} key={post.id} />
-            ))}
+            <Grid container spacing={2}>
+                {allPosts.map((post: any) => (
+                    <Grid item key={post.id}>
+                        <Post post={post} />
+                    </Grid>
+                ))}
+            </Grid>
 
             {allPosts.length < numberOfPosts && (
                 <Button onClick={onLoadMore}>Load more articles</Button>

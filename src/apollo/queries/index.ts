@@ -10,6 +10,15 @@ export const GET_ALL_POSTS = gql`
     }
 `
 
+export const GET_ALL_POSTS_FILTERED_BY_CATEGORY_ID = gql`
+    ${POST_FRAGMENT}
+    query GetAllPostsByCategoryId($id: ID!) {
+        allPosts(filter: { category_id: $id }) {
+            ...Post
+        }
+    }
+`
+
 export const GET_POST = gql`
     ${POST_FRAGMENT}
     query getAllPostsCount($id: ID!) {
