@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useDrop } from 'react-dnd'
@@ -17,7 +17,6 @@ import { useAllCategories } from '../hooks/useAllCategories'
 import { useAllPosts } from '../hooks/useAllPosts'
 
 const Category = () => {
-    const [filter, setFilter] = useState(null)
     const { allCategories } = useAllCategories()
     const { loading, error, allPosts } = useAllPosts()
 
@@ -25,8 +24,6 @@ const Category = () => {
         accept: 'Category',
         drop: (item: any) => {
             console.info(item)
-            const { category } = item
-            setFilter(category.id)
         },
         collect: (monitor) => ({
             isOver: monitor.isOver(),
