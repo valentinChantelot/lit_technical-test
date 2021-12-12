@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useDrop } from 'react-dnd'
@@ -10,20 +10,18 @@ import Typography from '@mui/material/Typography'
 import Stack from '@mui/material/Stack'
 
 import CategoryDraggableChip from '../components/Category/CategoryDraggableChip'
-import Loader from '../components/Loader'
-import Post from '../components/Post'
+import Posts from '../components/Category/Posts'
 
 import { useAllCategories } from '../hooks/useAllCategories'
-import { useAllPosts } from '../hooks/useAllPosts'
 
 const Category = () => {
+    const [filterId, setFilterId] = useState(null)
     const { allCategories } = useAllCategories()
-    const { loading, error, allPosts } = useAllPosts()
 
     const [{ canDrop, isOver }, drop] = useDrop(() => ({
         accept: 'Category',
         drop: (item: any) => {
-            console.info(item)
+            setFilterId(item.category.id)
         },
         collect: (monitor) => ({
             isOver: monitor.isOver(),
@@ -62,18 +60,7 @@ const Category = () => {
                             </Typography>
 
                             <Grid container spacing={2}>
-                                {loading && <Loader />}
-                                {error && (
-                                    <p>
-                                        Oups, it's seems that an error occured.
-                                    </p>
-                                )}
-
-                                {allPosts.map((post: any) => (
-                                    <Grid item key={post.id}>
-                                        <Post post={post} />
-                                    </Grid>
-                                ))}
+                                {filterId && <Posts id={filterId} />}
                             </Grid>
                         </Box>
                     </Grid>

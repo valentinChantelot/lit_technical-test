@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { GET_ALL_POSTS, POSTS_COUNT } from '../apollo/queries/index'
+import {
+    GET_ALL_POSTS,
+    POSTS_COUNT,
+    GET_ALL_POSTS_FILTERED_BY_CATEGORY_ID,
+} from '../apollo/queries/index'
 
 export const useAllPosts = (perPage = -1) => {
     const [page, setPage] = useState(0)
@@ -26,4 +30,19 @@ export const useAllPosts = (perPage = -1) => {
     }
 
     return { loading, error, allPosts, numberOfPosts, fetchMorePosts }
+}
+
+export const useAllFilteredPosts = (id) => {
+    const { loading, error, data, refetch } = useQuery(
+        GET_ALL_POSTS_FILTERED_BY_CATEGORY_ID,
+        { variables: { id: id }, notifyOnNetworkStatusChange: true }
+    )
+    const allFilteredPosts = data?.allPosts ?? []
+
+    return {
+        error,
+        loading,
+        allFilteredPosts,
+        refetchFilteredPosts: refetch,
+    }
 }
