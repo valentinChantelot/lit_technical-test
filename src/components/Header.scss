@@ -1,0 +1,22 @@
+.header {
+    padding: 2rem 4rem;
+
+    display: flex;
+    justify-content: space-between;
+
+    nav {
+        display: flex;
+        column-gap: 2rem;
+
+        a {
+            color: $dark;
+            font-size: 1.6rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+    }
+
+    &__logo {
+        width: 12rem;
+    }
+}

@@ -11,6 +11,8 @@ import Post from './pages/Post'
 import NotFound from './pages/NotFound'
 import Header from './components/Header'
 
+import './App.scss'
+
 function App() {
     return (
         <ApolloProvider client={client}>

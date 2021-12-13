@@ -1,15 +1,10 @@
 import React from 'react'
-import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
-import Chip from '@mui/material/Chip'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 import { Link } from 'react-router-dom'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 
 import { truncate } from '../utils/truncate'
 import { useAllCategories } from '../hooks/useAllCategories'
+import './Post.scss'
 
 export interface Props {
     post: {
@@ -32,28 +27,22 @@ const Post = ({ post }: Props) => {
     }
 
     return (
-        <Card sx={{ maxWidth: 345 }} key={post.id}>
-            <CardMedia
-                component="img"
-                height="140"
-                image={post.cover}
-                alt="green iguana"
-            />
-            <CardContent>
-                <Chip label={getCategory(post.category_id)} />
-                <Typography gutterBottom variant="h5" component="h2">
-                    {post.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {truncate(post.content)}
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <Button component={Link} to={`/post/${post.id}`} size="small">
-                    Read more
-                </Button>
-            </CardActions>
-        </Card>
+        <article className="post">
+            <div
+                className="post__illustration"
+                style={{ backgroundImage: `url(${post.cover})` }}
+            ></div>
+            <div className="post__content">
+                <span className="post__content__category">
+                    {getCategory(post.category_id)}
+                </span>
+                <h3>{post.title}</h3>
+                <p>{truncate(post.content)}</p>
+                <Link to={`/post/${post.id}`} className="readMore">
+                    Read more <ArrowForwardIcon />
+                </Link>
+            </div>
+        </article>
     )
 }
 

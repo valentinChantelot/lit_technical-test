@@ -1,16 +1,15 @@
 import React from 'react'
 
 import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 
 import { useAllPosts } from '../hooks/useAllPosts'
 
 import Loader from '../components/Loader'
 import Post from '../components/Post'
 import { POSTS_PER_PAGE_LIMIT } from '../utils/constants'
+
+import './Home.scss'
 
 const Home = () => {
     const { loading, error, allPosts, numberOfPosts, fetchMorePosts } =
@@ -21,12 +20,12 @@ const Home = () => {
     }
 
     return (
-        <Container maxWidth="md" sx={{ paddingTop: 3, paddingBottom: 3 }}>
-            <Box sx={{ marginBottom: 3, borderBottom: '1px solid #313131' }}>
-                <Typography variant="h4">Latest Posts</Typography>
-            </Box>
-
-            {loading && <Loader />}
+        <Container
+            maxWidth="md"
+            sx={{ paddingTop: 3, paddingBottom: 3 }}
+            className="home-page"
+        >
+            <h1>Lastest posts</h1>
 
             {error && <p>Oups, it's seems that an error occured.</p>}
 
@@ -38,8 +37,11 @@ const Home = () => {
                 ))}
             </Grid>
 
+            {loading && <Loader />}
             {allPosts.length < numberOfPosts && (
-                <Button onClick={onLoadMore}>Load more articles</Button>
+                <button type="button" onClick={onLoadMore}>
+                    Load more articles
+                </button>
             )}
         </Container>
     )

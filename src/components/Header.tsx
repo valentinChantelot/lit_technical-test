@@ -1,46 +1,47 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+import { ReactComponent as Logo } from '../assets/Logo.svg'
+
+import './Header.scss'
 
 interface NavigationItem {
-  label: string;
-  path: string;
+    label: string
+    path: string
 }
 
 export interface Props {
-  navigation: NavigationItem[];
+    navigation: NavigationItem[]
 }
 
 const Header = ({ navigation }: Props) => {
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            LIT Technical test
-          </Typography>
+    return (
+        <header className="header">
+            <nav>
+                {navigation &&
+                    navigation.length > 0 &&
+                    navigation.map((item: NavigationItem, index: number) => (
+                        <Link to={item.path} key={index}>
+                            {item.label}
+                        </Link>
+                    ))}
+            </nav>
+            <nav>
+                <Link to="/">
+                    <Logo className="header__logo" />
+                </Link>
+            </nav>
+            <nav>
+                <a
+                    href="https://github.com/valentinChantelot/lit_technical-test"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    See code
+                </a>
+            </nav>
+        </header>
+    )
+}
 
-          {navigation &&
-            navigation.length > 0 &&
-            navigation.map((item: NavigationItem, index: number) => (
-              <Button
-                color="inherit"
-                component={Link}
-                to={item.path}
-                key={index}
-              >
-                {item.label}
-              </Button>
-            ))}
-
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
-};
-
-export default Header;
+export default Header
