@@ -1,0 +1,15 @@
+.post-page {
+    &__illustration {
+        height: 40rem;
+
+        background-size: cover;
+        background-position: center;
+    }
+
+    &__category {
+        display: table;
+        margin-left: auto;
+        padding: 0.5rem 1rem;
+        background-color: $accentuated;
+    }
+}

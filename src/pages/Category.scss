@@ -1,0 +1,37 @@
+.category-page {
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        column-gap: 2rem;
+    }
+
+    .posts-list {
+        min-height: 40vh;
+
+        &--is-empty {
+            padding: 2rem;
+            background-color: $light;
+            border: dashed 1px $dark;
+        }
+
+        &--can-drop {
+            border: dashed 1px $tardisBlue;
+            background-color: darken($light, 5%);
+        }
+
+        &--active {
+            border: dashed 1px $tardisBlue;
+            background-color: darken($light, 10%);
+        }
+    }
+
+    .categories-list {
+        padding: 2rem;
+        background-color: $light;
+
+        button {
+            width: 100%;
+            margin: 4rem auto;
+        }
+    }
+}

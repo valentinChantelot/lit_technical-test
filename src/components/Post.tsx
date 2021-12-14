@@ -1,4 +1,5 @@
 import React from 'react'
+import Grid from '@mui/material/Grid'
 import { Link } from 'react-router-dom'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 
@@ -27,22 +28,24 @@ const Post = ({ post }: Props) => {
     }
 
     return (
-        <article className="post">
-            <div
-                className="post__illustration"
-                style={{ backgroundImage: `url(${post.cover})` }}
-            ></div>
-            <div className="post__content">
-                <span className="post__content__category">
-                    {getCategory(post.category_id)}
-                </span>
-                <h3>{post.title}</h3>
-                <p>{truncate(post.content)}</p>
-                <Link to={`/post/${post.id}`} className="readMore">
-                    Read more <ArrowForwardIcon />
-                </Link>
-            </div>
-        </article>
+        <Grid item>
+            <article className="post">
+                <div
+                    className="post__illustration"
+                    style={{ backgroundImage: `url(${post.cover})` }}
+                ></div>
+                <div className="post__content">
+                    <span className="post__content__category">
+                        {getCategory(post.category_id)}
+                    </span>
+                    <h3>{post.title}</h3>
+                    <p>{truncate(post.content)}</p>
+                    <Link to={`/post/${post.id}`} className="readMore">
+                        Read more <ArrowForwardIcon />
+                    </Link>
+                </div>
+            </article>
+        </Grid>
     )
 }
 

@@ -3,13 +3,12 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 
 import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
-import Chip from '@mui/material/Chip'
 
 import { GET_POST } from '../apollo/queries/index'
 import { useCategory } from '../hooks/useCategory'
 
 import Loader from '../components/Loader'
+import './Post.scss'
 
 const PostComponent = () => {
     const { id } = useParams() as {
@@ -26,6 +25,7 @@ const PostComponent = () => {
             Post: any
         }
     }
+
     const { category } = useCategory(data?.Post?.id)
 
     const style = {
@@ -33,23 +33,21 @@ const PostComponent = () => {
     }
 
     return (
-        <Container maxWidth="md" sx={{ paddingTop: 3, paddingBottom: 3 }}>
-            {loading && <Loader />}
-            {error && <p>Oups, it's seems that an error occured.</p>}
+        <Container
+            maxWidth="md"
+            sx={{ paddingTop: 3, paddingBottom: 3 }}
+            className="post-page"
+        >
+            <article>
+                {loading && <Loader />}
+                {error && <p>Oups, it's seems that an error occured.</p>}
 
-            <div className="illustration" style={style}></div>
-            <Chip label={category?.title} />
-            <Typography gutterBottom variant="h1" component="h1">
-                {data?.Post?.title}
-            </Typography>
+                <div className="post-page__illustration" style={style}></div>
+                <span className="post-page__category">{category?.title} </span>
+                <h1>{data?.Post?.title}</h1>
 
-            <Typography
-                variant="body1"
-                component="article"
-                color="text.secondary"
-            >
-                {data?.Post?.content}
-            </Typography>
+                <p>{data?.Post?.content}</p>
+            </article>
         </Container>
     )
 }

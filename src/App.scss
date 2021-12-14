@@ -4,9 +4,12 @@ html {
 }
 
 body {
+    margin: 0;
     font-family: $montserrat;
     font-size: 1.6rem;
     color: $dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 *,
@@ -58,6 +61,7 @@ button {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    z-index: 1;
 
     &:after {
         content: '';
