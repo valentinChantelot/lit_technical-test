@@ -7,8 +7,10 @@
     column-gap: 1rem;
 
     background-color: white;
+    cursor: grab;
 
     &--is-dragging {
         background-color: $light;
+        cursor: grabbing;
     }
 }

@@ -27,7 +27,6 @@ export const CategoryDraggable = ({ category }: ICategoryProps) => {
                 isDragging && 'draggable-category--is-dragging'
             )}
             ref={drag}
-            role="Category"
         >
             <DragIndicatorIcon />
             <div className="draggable-category__content">
